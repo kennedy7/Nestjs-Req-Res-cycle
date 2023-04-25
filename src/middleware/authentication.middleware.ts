@@ -1,9 +1,9 @@
-import { Injectable, NestMiddleware } from "@nestjs/common";
-import { NextFunction } from "express";
+import { Injectable, NestMiddleware } from '@nestjs/common';
+import { NextFunction } from 'express';
 
-
-export class AuthenticationMiddleware implements NestMiddleware{
-    use(req: Request, res: Response, next: NextFunction) {
-        
-    }
+@Injectable()
+export class AuthenticationMiddleware implements NestMiddleware {
+  use(req: Request, res: Response, next: NextFunction) {
+    const userId = '123';
+  }
 }
