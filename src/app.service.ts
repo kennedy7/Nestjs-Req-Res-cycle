@@ -8,7 +8,7 @@ export class AppService {
   getHello(): string {
     const userId = this.requestService.getUserId();
 
-    this.logger.log(`userId: ${userId}`);
+    this.logger.log(`getHello userId: ${userId}`);
 
     return 'Hello world';
   }
