@@ -1,11 +1,13 @@
 import { CallHandler, ExecutionContext, Injectable, Logger, NestInterceptor } from "@nestjs/common";
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import { AuthenticationMiddleware } from "src/middleware/authentication.middleware";
+import { RequestService } from "src/middleware/request.service";
 
 
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
     private readonly logger = new Logger(AuthenticationMiddleware.name)
+    constructor(private requestService: RequestService){}
     intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> | Promise<Observable<any>> {
         const request = context.switchToHttp().getRequest();
         const userAgent = request.get('user-agent') || '';
@@ -15,5 +17,13 @@ export class LoggingInterceptor implements NestInterceptor {
         ${context.getHandler().name
         } invoked...
         `);
+        this.logger.debug('userId', this.requestService.getUserId())
+        const now = Date.now();
+        return next.handle().pipe(tap((req)=>{
+            const response = context.switchToHttp().getResponse();
+            const {statusCode} = response
+            const contentLength = response.get('content-length')
+        }))
+
     } 
 }
