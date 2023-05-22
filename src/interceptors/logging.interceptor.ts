@@ -19,7 +19,7 @@ export class LoggingInterceptor implements NestInterceptor {
         `);
         this.logger.debug('userId', this.requestService.getUserId())
         const now = Date.now();
-        return next.handle().pipe(tap((req)=>{
+        return next.handle().pipe(tap((res)=>{
             const response = context.switchToHttp().getResponse();
             const {statusCode} = response
             const contentLength = response.get('content-length')
@@ -28,7 +28,7 @@ export class LoggingInterceptor implements NestInterceptor {
                 Date.now() - now
              }ms
              `)
-        this.logger.debug()
+        this.logger.debug('Response:', res)
         })
         )
 
