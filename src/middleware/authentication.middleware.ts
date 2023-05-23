@@ -11,6 +11,6 @@ export class AuthenticationMiddleware implements NestMiddleware {
     this.logger.log(AuthenticationMiddleware.name);
     const userId = '123';
     this.requestService.setUserId(userId);
-    next();
+    next(); 
   }
 }
