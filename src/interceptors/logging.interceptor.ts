@@ -7,7 +7,7 @@ import { RequestService } from "src/middleware/request.service";
 @Injectable()
 export class LoggingInterceptor implements NestInterceptor {
     private readonly logger = new Logger(AuthenticationMiddleware.name)
-    constructor(private requestService: RequestService){}
+    constructor(private  readonly requestService: RequestService){}
     intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> | Promise<Observable<any>> {
         const request = context.switchToHttp().getRequest();
         const userAgent = request.get('user-agent') || '';
