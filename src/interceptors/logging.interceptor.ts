@@ -22,7 +22,7 @@ export class LoggingInterceptor implements NestInterceptor {
     const { ip, method, path: url } = request;
 
     this.logger.log(`${method} ${url} ${userAgent} ${ip}: ${
-      context.getClass().name
+      context.getClass().nam
     } 
         ${context.getHandler().name} invoked...
         `);
